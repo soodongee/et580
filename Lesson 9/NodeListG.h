@@ -1,25 +1,26 @@
-#include "Iterator.h"
+#include <vector>
 
-template <typename D>
+template<typename T>
 class NodeListG {
 private:
-    int n; 
-    DNode<D>* head;
-    DNode<D>* trailer; 
+    std::vector<T> list;
 
 public:
-    NodeListG();
-    ~NodeListG();
-    int size() const;
-    bool empty() const;
+    void push_back(const T& e) {
+        list.push_back(e);
+    }
+    typename std::vector<T>::iterator begin() {
+        return list.begin();
+    }
+    typename std::vector<T>::iterator end() {
+        return list.end();
+    }
+    size_t size() const {
+        return list.size();
+    }
+    bool empty() const {
+        return list.empty();
+    }
 
-    Iterator<D> begin() const;
-    Iterator<D> end() const;
-    void insertFront(const D& e);
-    void insertBack(const D& e);
-    void insert(const Iterator<D>& p, const D& e);
-    void eraseFront();
-    void eraseBack();
-    void erase(const Iterator<D>& p);
-    
+
 };
