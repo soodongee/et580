@@ -1,34 +1,38 @@
-#include "NodeDictionaryG.h"
 #include <iostream>
-#include <string>
+#include "ListPriorityQueueSTL.h"
+#include "Point2DSTL.h"
+#include "PriorityQueueException.h"
+
 
 int main() {
-    NodeDictionaryG<int, std::string> dictionary;
+    ListPriorityQueueSTL<Point2DSTL, LeftRight, PriorityQueueException> PList;
 
-    // Testing put operation
-    dictionary.put(1, "Apple");
-    dictionary.put(2, "Banana");
-    dictionary.put(3, "Cherry");
+    // Add 5 points
+    PList.insert(Point2DSTL(9, 10));
+    PList.insert(Point2DSTL(5, 6));
+    PList.insert(Point2DSTL(3, 4));
+    PList.insert(Point2DSTL(7, 8));
+    PList.insert(Point2DSTL(1, 2));
 
-    std::cout << "Initial Dictionary:" << std::endl;
-    for (auto it = dictionary.begin(); it != dictionary.end(); ++it) {
-        std::cout << "Key: " << it.getNode()->elem.key() << ", Value: " << *it << std::endl;
-    }
+    // Find and print the minimum value
+    std::cout << "Min: " << PList.min() << std::endl;
 
-    // Testing find operation
-    auto it = dictionary.find(2);
-    if (it != dictionary.end()) {
-        std::cout << "Found: " << *it << " at key 2." << std::endl;
-    } else {
-        std::cout << "Key 2 not found." << std::endl;
-    }
+    // Remove the minimum value
+    PList.removeMin();
 
-    // Testing erase operation
-    dictionary.erase(2);
-    std::cout << "After erasing key 2:" << std::endl;
-    for (auto it = dictionary.begin(); it != dictionary.end(); ++it) {
-        std::cout << "Key: " << it.getNode()->elem.key() << ", Value: " << *it << std::endl;
-    }
+    // Find and print the new minimum value
+    std::cout << "Min after removeMin: " << PList.min() << std::endl;
+
+    std::cout << "Min: " << PList.min() << std::endl;
+
+    PList.removeMin();
+
+    std::cout << "Min after removeMin: " << PList.min() << std::endl;
+
+    //print size
+    std::cout << "Queue size: " << PList.size() << std::endl;
+
+
 
     return 0;
 }
